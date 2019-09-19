@@ -22,6 +22,9 @@ namespace maple {
 
 template <typename TKey, typename TObject, typename... TArgs>
 class ObjectFactory {
+  //一个unique_ptr"拥有“他所指向的对象
+  //某个时刻只能有一个unique_ptr指向一个给定的对象。当unique_ptr被销毁时，它所指向的对象也被销毁。
+  //uniptr_ptr表达的是一种独占的思想。
   using PtrObject = std::unique_ptr<TObject>;
   using CreatFunc = std::function<PtrObject(TArgs...)>;
   using CreatorHolder = std::map<TKey, CreatFunc>;
@@ -30,9 +33,12 @@ class ObjectFactory {
   using Key = TKey;
   using Value = TObject;
 
+
+
   void Register(const TKey &key, CreatFunc func) {
     auto it = objectCreator.find(key);
     if (it == objectCreator.end()) {
+      //注册对应的函数
       objectCreator[key] = func;
     }
   }
@@ -61,6 +67,8 @@ class ObjectFactory {
   ObjectFactory &operator=(const ObjectFactory&&) = delete;
 
  private:
+  //一个map对象
+  // using CreatorHolder = std::map<TKey, CreatFunc>;
   CreatorHolder objectCreator;
 };
 

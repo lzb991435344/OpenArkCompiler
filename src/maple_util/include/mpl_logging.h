@@ -135,10 +135,13 @@
 namespace maple {
 extern class LogInfo logInfo;
 
+//log等级
 enum LogLevel { kLlDbg, kLlLog, kLlInfo, kLlWarn, kLlErr, kLlFatal, kLlMax };
 
+//log标记
 enum LogTags { kLtThread, kLtLooper, kLtAll };
 
+//log模式
 enum LogMode {
   kLmSimple,
   kLmComplex,
