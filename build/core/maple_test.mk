@@ -4,7 +4,7 @@ test: $(APP_S)
 include $(MAPLE_BUILD_CORE)/mplcomb.mk
 include $(MAPLE_BUILD_CORE)/jbc2mpl.mk
 include $(MAPLE_BUILD_CORE)/java2jar.mk
-
+#jbc2mpl -injar java-core.jar -out libjava-core
 .PHONY: clean
 clean:
 	@rm -rf *.jar

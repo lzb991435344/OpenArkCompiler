@@ -26,6 +26,8 @@
 #include "option_parser.h"
 
 namespace maple {
+
+ //输入文件的类型 
 enum InputFileType {
   kNone,
   kClass,
