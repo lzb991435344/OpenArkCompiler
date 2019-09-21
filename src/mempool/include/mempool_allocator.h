@@ -117,23 +117,42 @@ class MapleStack {
  private:
   MapleVector<T> vect;
 };
-
+//list
 template <typename T>
 using MapleList = std::list<T, MapleAllocatorAdapter<T>>;
+
+//forward_list
 template <typename T>
 using MapleForwardList = std::forward_list<T, MapleAllocatorAdapter<T>>;
+
+//set
+//有序，不重复
 template <typename T, typename Comparator = std::less<T>>
 using MapleSet = std::set<T, Comparator, MapleAllocatorAdapter<T>>;
+
+//unordered_set
+//无序
 template <typename T, typename Hash = std::hash<T>, typename Equal = std::equal_to<T>>
 using MapleUnorderedSet = std::unordered_set<T, Hash, Equal, MapleAllocatorAdapter<T>>;
+
+//map中有序，是一颗严格的平衡二叉树
+//有序
 template <typename K, typename V, typename Comparator = std::less<K>>
 using MapleMap = std::map<K, V, Comparator, MapleAllocatorAdapter<std::pair<const K, V>>>;
+
+//可重复的元素
 template <typename K, typename V, typename Comparator = std::less<K>>
 using MapleMultiMap = std::multimap<K, V, Comparator, MapleAllocatorAdapter<std::pair<const K, V>>>;
+
+//无序，通过hash(key)判断元素是否相同
+//unordered_map的key需要定义hash_value函数并且重载operator==。
 template <typename K, typename V, typename Hash = std::hash<K>, typename Equal = std::equal_to<K>>
 using MapleUnorderedMap = std::unordered_map<K, V, Hash, Equal, MapleAllocatorAdapter<std::pair<const K, V>>>;
+
 template <typename K, typename V, typename Hash = std::hash<K>, typename Equal = std::equal_to<K>>
 using MapleUnorderedMultiMap = std::unordered_multimap<K, V, Hash, Equal, MapleAllocatorAdapter<std::pair<const K, V>>>;
+
+
 // Implementation details below.
 template <>
 class MapleAllocatorAdapter<void> {
@@ -171,6 +190,7 @@ class MapleAllocatorAdapter {
   using const_reference = const T&;
   using size_type = size_t;
   using difference_type = std::ptrdiff_t;
+
   template <typename U>
   struct rebind {
     using other = MapleAllocatorAdapter<U>;

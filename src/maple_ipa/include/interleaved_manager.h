@@ -23,7 +23,7 @@ namespace maple {
   InterleavedManager负责phase manager的创建、管理和运行。通过调用AddPhases接口，
 它将创建一个对应类型的phase manager并添加进MapleVector中, 同时该phase manager相应的phase注册、
 添加也会自动被触发。
-
+    核心：重载run()函数
 */
 class InterleavedManager {
  public:
@@ -63,10 +63,11 @@ class InterleavedManager {
     return phaseManagers.at(i);
   }
 
+  //获取指向特定phase管理器的指针
   const PhaseManager *GetSupportPhaseManager(const std::string &phase);
 
  private:
-  MapleAllocator allocator;
+  MapleAllocator allocator;//maple的内存分配器
   MIRModule &mirModule;
   MapleVector<PhaseManager*> phaseManagers;
   MapleVector<PhaseManager*> supportPhaseManagers;  // Used to check whether a phase is supported and by which manager

@@ -104,6 +104,7 @@ bool MIRBuilder::IsOfSameType(MIRType *type1, MIRType *type2) {
 // traverse parent first but match self first.
 void MIRBuilder::TraverseToNamedFieldWithType(MIRStructType *structType, GStrIdx nameIdx, TyIdx typeIdx,
                                               uint32 &fieldID, uint32 &idx) {
+  //类型不符合要求 
   if (structType == nullptr) {
     return;
   }
